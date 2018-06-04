@@ -1062,7 +1062,7 @@ nav.main-menu ul a > i.material-icons {
 	width: 200px;
 	padding: 15px;
 	z-index: 100;
-	filter: grayscale(100);
+	/* filter: grayscale(100); */
 	margin-top: 25px;
 }
 
@@ -1107,4 +1107,36 @@ img {
 	max-width: 100%;
 	display: block;
 	margin: auto;
+}
+
+#primary .card-content p{
+	height: 120px;
+}
+
+#primary .card-content h4{
+	margin-top: 0px;
+}
+
+.card-content .row{
+	margin-bottom: 5px;
+}
+
+.page-footer {
+	padding-top: 20px;
+	color: #fff;
+	background-color:  #22a1b6;
+	width: calc(100% - 300px);
+	margin-left: 300px;
+}
+
+nav {
+	color: #fff;
+	background-color: #22a1b6;
+	width: 100%;
+	height: auto;
+	line-height: 56px;
+}
+
+.wprm-recipe-details-container > div {
+	margin-bottom: 0.5em;
 }

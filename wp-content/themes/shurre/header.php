@@ -24,12 +24,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!--Importar Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Importar estilo del sitio-->
-    <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_url')?>" />
-    <!--Importar materialize.css-->
-    <!-- <link rel="stylesheet" type="text/css" media="all" href="<?php echo get_stylesheet_directory_uri();?>/css/materialize.min.css"  media="screen,projection"/> -->
-    <!--Importar estilo personalizados-->
-    <!-- <link rel="stylesheet" type="text/css" media="all" href="<?php get_stylesheet_directory_uri();?>/css/custom-style.css" /> -->
     <!--Definir el favicon del sitio-->
     <link rel="shorcut icon" href="<?php echo  get_stylesheet_directory_uri()?>/favicon.ico">
     <!--<script src="main.js"></script> -->
@@ -66,13 +60,13 @@
                 'menu_id'         => 'primary-menu',
                 ) );
                 ?>
-              </ul>
+                </ul>
             </div>
 
           </nav><!-- #site-navigation -->
         </div>
 
-        <ul id="slide-out" class="sidenav">
+    <ul id="slide-out" class="sidenav">
     <div class="card">
       <div class="card-image">
         <!-- <img src="<?php echo get_stylesheet_directory_uri()?>/img/sidebar_bk.jpeg)"> -->
@@ -104,13 +98,13 @@
       </div>
 	  
 	 
-      <ul class="collection with-header">
+      <!-- <ul class="collection with-header">
         <li class="collection-header"><h4>First Names</h4></li>
         <li class="collection-item">Alvin</li>
         <li class="collection-item">Alvin</li>
         <li class="collection-item">Alvin</li>
         <li class="collection-item">Alvin</li>
-      </ul>
+      </ul> -->
 </ul>
 
 </header><!-- #masthead -->

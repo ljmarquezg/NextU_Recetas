@@ -24,9 +24,7 @@ get_header();
 					the_archive_title( '<div class="card-panel yellow darken-2 white-text text-darken-0"> <i class="material-icons">label</i>', '</div>' );
 				elseif ( $categoria === 'paises') :
 					the_archive_title( '<div class="card-panel teal darken-2 white-text text-darken-0"> <i class="material-icons">language</i>', '</div>' );
-				endif;
-
-				
+				endif;			
 				the_archive_description( '<div class="archive-description">', '</div>' );
 				?>
 			</header><!-- .page-header -->

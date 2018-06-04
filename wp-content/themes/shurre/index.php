@@ -16,9 +16,7 @@ get_header();
 ?>
 
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main">
-			<div class="row">
-				
+		<main id="main" class="site-main">			
 				<?php
 					if ( have_posts() ) :
 						if ( is_home() && ! is_front_page() ) :
@@ -28,36 +26,53 @@ get_header();
 					</header>
 				<?php
 						endif;
-						echo '<div class="card-panel blue lighten-2 white-text text-darken-0"> <i class="material-icons">local_dining</i> Nuevo Post de Platos </div>';
-						/* Start the Loop */
-						echo '<div class="col l12">';
-						query_posts('category_name=Platos');
-						// foreach ($query as $key => $post) {
-					
-						while ( have_posts() ) :
-							the_post();
-							/*
-							* Include the Post-Type-specific template for the content.
-							* If you want to override this in a child theme, then include a file
-							* called content-___.php (where ___ is the Post Type name) and that will be used instead.
-							*/
-							get_template_part( 'template-parts/content', get_post_type() );
-						// }
-						endwhile;
-						echo '</div>';
+
+						show_category('Ocasiones');
+						show_category('Platos');
+						show_category('Paises');
+
+						// echo '<div class="row">';
+						// 	echo '<h5 class="card-panel blue lighten-2 white-text text-darken-0"> <i class="material-icons">local_dining</i> Nuevo Post de Platos </h5>';
+						// 	/* Start the Loop */
+						// 	echo '<div class="col m12">';
+						// 	query_posts('category_name=Platos');
+						// 	if (have_posts()):			
+						// 		$i = 0; while (have_posts() && $i < 3) :
+						// 				the_post();
+						// 				get_template_part( 'template-parts/content-index', get_post_type() );
+						// 				$i++;
+						// 			endwhile;
+						// 	else:
+						// 		echo 'No hay recetas en esta categoría';
+
+						// 	endif;
+						// 		echo '</div>';
+						// 	echo '</div>';
 						
-						echo '<div class="col l12">';
-						echo '<div class="card-panel yellow darken-2 white-text text-darken-0"> <i class="material-icons">label</i> Nuevo Post de Ocasiones </div>';
-						/* Start the Loop */
-						$query = query_posts('category_name=Ocasiones');
-						foreach ($query as $key => $post) {
-					
-						// while ( have_posts() ) :
-							the_post();
-							get_template_part( 'template-parts/content-index', get_post_type() );
-						}
-						// endwhile;
-						echo '</div>';
+						// echo '<div class="row">';
+						// 	echo '<h5 class="card-panel yellow darken-2 white-text text-darken-0"> <i class="material-icons">label</i> Nuevo Post de Ocasiones </h5>';
+						// 	/* Start the Loop */
+						// 	echo '<div class="col m12">';
+						// 	query_posts('category_name=Ocasiones');			
+						// 	$i = 0; while (have_posts() && $i < 3) :
+						// 			the_post();
+						// 			get_template_part( 'template-parts/content-index', get_post_type() );
+						// 			$i++;
+						// 		endwhile;
+						// 	echo '</div>';
+						// echo '</div>';
+
+						// echo '<div class="row">';
+						// 	echo '<h5 class="card-panel teal darken-2 white-text text-darken-0"> <i class="material-icons">language</i> Nuevo Post de Paises </h5>';
+						// 	/* Start the Loop */
+						// 	query_posts('category_name=Paises');			
+						// 	$i = 0; while (have_posts() && $i < 3) :
+						// 			the_post();
+						// 			get_template_part( 'template-parts/content-index', get_post_type() );
+						// 			$i++;
+						// 		endwhile;
+						// 	echo '</div>';
+						// echo '</div>';
 
 					else :
 

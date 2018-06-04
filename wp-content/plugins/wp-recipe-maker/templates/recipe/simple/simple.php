@@ -57,18 +57,18 @@
 		}?>
 		</div>
 		<?php 
-		$taxonomies = WPRM_Taxonomies::get_taxonomies();
+		// $taxonomies = WPRM_Taxonomies::get_taxonomies();
 
-		foreach ( $taxonomies as $taxonomy => $options ) :
-			$key = substr( $taxonomy, 5 );
-			$terms = $recipe->tags( $key );
+		// foreach ( $taxonomies as $taxonomy => $options ) :
+		// 	$key = substr( $taxonomy, 5 );
+		// 	$terms = $recipe->tags( $key );
 
 			// Hide keywords from template.
-			if ( 'keyword' === $key && ! WPRM_Settings::get( 'metadata_keywords_in_template' ) ) {
-				$terms = array();
-			}
-			if ( count( $terms ) > 0 ) : ?>
-			<div class="wprm-recipe-<?php echo $key; ?>-container">
+			// if ( 'keyword' === $key && ! WPRM_Settings::get( 'metadata_keywords_in_template' ) ) {
+			// 	$terms = array();
+			// }
+			// if ( count( $terms ) > 0 ) : ?>
+			<!-- <div class="wprm-recipe-<?php echo $key; ?>-container">
 				<span class="wprm-recipe-details-icon"><?php include( WPRM_DIR . 'assets/icons/tag.svg' ); ?></span> <span class="wprm-recipe-details-name wprm-recipe-<?php echo $key; ?>-name"><?php echo WPRM_Template_Helper::label( $key . '_tags', $options['singular_name'] ); ?></span>
 				<span class="wprm-recipe-<?php echo $key; ?>">
 					<?php foreach ( $terms as $index => $term ) {
@@ -78,9 +78,9 @@
 						echo $term->name;
 					} ?>
 				</span>
-			</div>
-		<?php endif; // Count.
-		endforeach; // Taxonomies. ?>
+			</div> -->
+		<?php //endif; // Count.
+		//endforeach; // Taxonomies. ?>
 	</div>
 
 	
@@ -240,4 +240,5 @@
 	</div>
 	<?php endif; // Notes ?>
 	<?php echo WPRM_Template_Helper::nutrition_label( $recipe->id() ); ?>
+	
 </div>

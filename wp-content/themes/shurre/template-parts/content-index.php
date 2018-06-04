@@ -46,7 +46,6 @@
 							}
 
 							if (get_cat_name($categoria->category_parent) === 'Ocasiones' ){
-
 								?>
 									<div class="row">
 										<div class="chip">
@@ -57,6 +56,16 @@
 								<?php 
 							}
 
+							// if ( in_category( 'Ocasiones') )  {
+							// 	echo '<div class="row">
+							// 	<div class="chip">
+							// 		<i class="material-icons">label</i>
+							// 		Ésta en ocasiones
+							// 	</div>
+							// </div>';
+							// 	// Lo que queramos hacer 
+							// }
+
 						}
 		?>
         </footer><!-- .entry-footer -->
@@ -64,7 +73,7 @@
     </div>
 		<div class="card-action">
 				<a href="<?php echo get_permalink($post->ID) ?>">Ir a la receta</a>
-			</div>
+		</div>
   </div>
 
 <?php /*

@@ -119,11 +119,20 @@ add_action( 'widgets_init', 'shurre_widgets_init' );
  * Enqueue scripts and styles.
  */
 function shurre_scripts() {
+
+	wp_enqueue_style( 'materializestyle', get_stylesheet_directory_uri().'/css/materialize.min.css' );
+
 	wp_enqueue_style( 'shurre-style', get_stylesheet_uri() );
 
 	wp_enqueue_script( 'shurre-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
 	wp_enqueue_script( 'shurre-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+
+	wp_enqueue_script( 'javascript', get_stylesheet_directory_uri() . '/js/jquery-2.1.1.min.js', array( 'jquery' ), '1.0', true );
+	
+	wp_enqueue_script( 'materializejs', get_stylesheet_directory_uri() . '/js/materialize.min.js', array( 'jquery' ), '1.0', true );
+
+	wp_enqueue_script( 'init', get_stylesheet_directory_uri() . '/js/init.js', array( 'jquery' ), '1.0', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -167,37 +176,83 @@ function shurre_post_thumbnail(){
 	
 }
 
- 	/*=================================================================================
-			Incrementar el limite de memoria de Wordpress
-	==================================================================================*/
-
-	add_action( 'wp_enqueue_scripts', 'includestyles' );
-	function includestyles() {
-	  wp_enqueue_style( 'materializestyle', get_stylesheet_directory_uri().'/css/materialize.min.css' );
-	  wp_enqueue_style( 'style', get_stylesheet_directory_uri().'/style.css' );
-	  wp_enqueue_script( 'javascript', get_stylesheet_directory_uri() . '/js/jquery-2.1.1.min.js', array( 'jquery' ), '1.0', true );
-	  wp_enqueue_script( 'materializejs', get_stylesheet_directory_uri() . '/js/materialize.min.js', array( 'jquery' ), '1.0', true );
-	  wp_enqueue_script( 'init', get_stylesheet_directory_uri() . '/js/init.js', array( 'jquery' ), '1.0', true );
-	 } 
-
- 	/*=================================================================================
+	/*=================================================================================
 			Incrementar el limite de memoria de Wordpress
 	==================================================================================*/
 	define( 'WP_MEMORY_LIMIT', '256M' );
 	/*=======================================================================================
-			Mostrar la descripción del producto en la tienda
+			Limitar el numero de caracteres a mostrar en el index
 	=========================================================================================*/
   
-function get_excerpt($limit, $source = null){
+	function get_excerpt($limit, $source = null){
 
-    if($source == "content" ? ($excerpt = get_the_content()) : ($excerpt = get_the_excerpt()));
-    $excerpt = preg_replace(" (\[.*?\])",'',$excerpt);
-    $excerpt = strip_shortcodes($excerpt);
-    $excerpt = strip_tags($excerpt);
-    $excerpt = substr($excerpt, 0, $limit);
-    $excerpt = substr($excerpt, 0, strripos($excerpt, " "));
-    $excerpt = trim(preg_replace( '/\s+/', ' ', $excerpt));
-	$excerpt = $excerpt;
-	// .'... <a href="'.get_permalink($post->ID).'">more</a>';
-    return $excerpt;
-}
+		if($source == "content" ? ($excerpt = get_the_content()) : ($excerpt = get_the_excerpt()));
+		$excerpt = preg_replace(" (\[.*?\])",'',$excerpt);
+		$excerpt = strip_shortcodes($excerpt);
+		$excerpt = strip_tags($excerpt);
+		$excerpt = substr($excerpt, 0, $limit);
+		$excerpt = substr($excerpt, 0, strripos($excerpt, " "));
+		$excerpt = trim(preg_replace( '/\s+/', ' ', $excerpt));
+		$excerpt = $excerpt;
+		// .'... <a href="'.get_permalink($post->ID).'">more</a>';
+		return $excerpt;
+	}
+
+	/*=======================================================================================
+			Mostrar la información del post como tarjetas Materialize
+	=========================================================================================*/
+	function show_category($cat_name){
+		if ($cat_name === 'Platos'){
+			$background_color = 'blue lighten-2';
+		}elseif ($cat_name === 'Ocasiones') {
+			$background_color = 'yellow darken-2';
+		}elseif ($cat_name === 'Paises') {
+			$background_color = 'teal darken-2';
+		}
+
+		echo '<div class="row">';
+				echo '<h5 class="card-panel '. $background_color .' white-text text-darken-0"> <i class="material-icons">local_dining</i> Nuevo Post de '. $cat_name. ' </h5>';
+				/* Start the Loop */
+				echo '<div class="col m12">';
+				query_posts('category_name='.$cat_name);			
+				$i = 0; while (have_posts() && $i < 3) :
+						the_post();
+						get_template_part( 'template-parts/content-index', get_post_type() );
+						$i++;
+					endwhile;
+				echo '</div>';
+			echo '</div>';
+	}
+
+
+	add_filter( 'wp_nav_menu_items', 'items_menu', 10, 2);
+
+	function items_menu( $items, $args ) {
+	
+		if ($args->theme_location == 'primary') {
+			if (is_user_logged_in())
+			{
+
+
+                  } else {
+                   
+                    echo '<a href="'.wp_login_url().'" rel="home"><i class="material-icons">assignment_turned_in</i>Iniciar Sesión</a>'; 
+				  }
+
+				$items .= '<li">
+							<a href="'. wp_logout_url(get_permalink()) .'"> <i class="material-icons">arrow_back</i>Cerrar Sesión. </a>
+							</li>';
+			}
+			else
+			{
+				$items .= '<li>
+							<a href="'. wp_login_url(get_permalink()) .'"> <i class="material-icons">description</i>Registrarse</a> 
+							</li>';
+				$items .= '<li>
+							<a href="'. wp_login_url(get_permalink()) .'"><i class="material-icons">contacts</i>'. __("Log In") .'</a>
+							</li>';
+
+			}
+	
+		return $items;
+	}
