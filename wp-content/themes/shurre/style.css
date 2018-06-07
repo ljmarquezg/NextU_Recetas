@@ -1060,10 +1060,10 @@ nav.main-menu ul a > i.material-icons {
 	float: none;
 	display: block;
 	width: 200px;
-	padding: 15px;
+	padding: 50px 0 0 0;
 	z-index: 100;
 	/* filter: grayscale(100); */
-	margin-top: 25px;
+	/*margin-top: 25px;*/
 }
 
 .sidenav .card .card-title {
@@ -1139,4 +1139,88 @@ nav {
 
 .wprm-recipe-details-container > div {
 	margin-bottom: 0.5em;
+}
+
+.sidenav li > a {
+	color: rgba(0,0,0,0.87);
+	display: block;
+	font-size: 14px;
+	font-weight: 500;
+	height: 48px;
+	line-height: 48px;
+	padding: 0 10px;
+}
+.sidenav li > a > i, .sidenav li > a > [class^="mdi-"], .sidenav li > a li > a > [class*="mdi-"], .sidenav li > a > i.material-icons {
+	margin: 0;
+}
+.search-submit.btn{
+		width: 20px;
+		margin: 0 5px;
+		background: transparent;
+		box-shadow: none;
+		display: inline;
+		padding: 0;
+}
+.search-form label {
+	width: calc(100% - 35px);
+	display: inline-block;
+	padding-right: 10px;
+}
+
+.sidebar .collection.with-header .collection-header {
+	background-color: #fff;
+	border-bottom: 1px solid #e0e0e0;
+	padding: 10px 20px;
+	height: auto;
+}
+
+.sidenav .menu-menu-lateral-container li > a {
+	color: rgba(0,0,0,0.87);
+	display: block;
+	font-size: 14px;
+	font-weight: 500;
+	height: auto;
+	line-height: 35px;
+	padding: 0 10px;
+}
+
+.sidenav li > a.btn, .sidenav li > a.btn-large, .sidenav li > a.btn-small, .sidenav li > a.btn-large, .sidenav li > a.btn-floating {
+	color: #fff;
+	height: 30px;
+	line-height: 30px;
+}
+.sidenav li > a > i, .sidenav li > a > [class^="mdi-"], .sidenav li > a li > a > [class*="mdi-"], .sidenav li > a > i.material-icons {
+	margin: 0;
+	line-height: 30px;
+	height: auto;
+}
+
+
+#slide-out ul {
+ margin-left: 10px
+}
+
+#slide-out ul ul {
+	margin-left: 20px
+}
+.widget-title{
+	font-size: 1.28rem;
+}
+
+.sidenav li > a {
+	color: rgba(0,0,0,0.87);
+	display: block;
+	font-size: 14px;
+	font-weight: 500;
+	height: auto;
+	line-height: 30px;
+	padding: 0 10px;
+}
+
+.sidenav ul > li {
+	box-shadow: 0px 0px 3px 0px #666;
+}
+
+.sidenav ul > li > ul > li{
+	box-shadow: none
 }

@@ -11,8 +11,6 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-
-
 	<header class="entry-header card-panel teal darken-4 white-color white-text text-darken-0">
 		<?php
 		if ( is_singular() ) :

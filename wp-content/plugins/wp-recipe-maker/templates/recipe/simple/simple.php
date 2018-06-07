@@ -35,7 +35,7 @@
 			<?php 
 			}
 
-			if (get_cat_name($categoria->category_parent) === 'Paises' ){
+			if (get_cat_name($categoria->category_parent) === 'Regiones' ){
 			?>
 				<div class="chip">
 					<i class="material-icons">language</i>
@@ -92,7 +92,14 @@
 				<div class="collapsible-header "><i class="material-icons">menu</i>Descripción de la receta</div>
 					<div class="collapsible-body">
 						<span>
-							<?php echo $recipe->summary(); ?>
+							<?php 
+							if ($recipe->summary()){
+								echo $recipe->summary(); 
+							}else{
+								echo 'Si la descripción es nula el plugin mostrará un error';
+							}
+								
+							?>
 						</span>
 
 						<!-- Instrucciones de la receta -->

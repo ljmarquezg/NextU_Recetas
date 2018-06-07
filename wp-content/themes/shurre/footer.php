@@ -20,20 +20,21 @@
             <div class="row">
               <div class="col l6 s12">
                 <h5 class="white-text">Shurre</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                <p class="grey-text text-lighten-4">Blog diseñado para mostrar listado de recetas para NextU</p>
               </div>
               <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                </ul>
+              <?php if ( is_active_sidebar( 'sidebar-footer' ) ) : ?>
+                <div id="sidebar-footer">
+                <?php dynamic_sidebar( 'sidebar-footer' ); ?>
+                </div>
+              <?php endif; ?>
               </div>
             </div>
           </div>
           <div class="footer-copyright">
             <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            © 2018 Luis José Márquez González
+            <a class="grey-text text-lighten-4 right" href="https://www.behance.com/ljmarquezg">Ver Portafolio</a>
             </div>
           </div>
         </footer>

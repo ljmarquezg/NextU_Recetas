@@ -45,6 +45,10 @@ if ( ! function_exists( 'shurre_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
 			'menu-1' => esc_html__( 'Primary', 'shurre' ),
+			/*=======================================================================================
+				Registrar el menú lateral en el panel de menús de wordpress
+			=========================================================================================*/
+			'sidebar' => __( 'Menu Lateral', 'shurre' )
 		) );
 
 		/*
@@ -170,9 +174,11 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 function shurre_post_thumbnail(){
 	$thumbnail = get_stylesheet_directory_uri().'/img/food.jpeg';
 	if (has_post_thumbnail()){
+		
 		return the_post_thumbnail();
-	}
-	return '<img class="responsive shurre" src="'.$thumbnail.'" alt="">';
+	}else{
+		echo '<img class="responsive shurre" src="'.$thumbnail.'" alt="">';
+	}	
 	
 }
 
@@ -185,7 +191,6 @@ function shurre_post_thumbnail(){
 	=========================================================================================*/
   
 	function get_excerpt($limit, $source = null){
-
 		if($source == "content" ? ($excerpt = get_the_content()) : ($excerpt = get_the_excerpt()));
 		$excerpt = preg_replace(" (\[.*?\])",'',$excerpt);
 		$excerpt = strip_shortcodes($excerpt);
@@ -193,8 +198,7 @@ function shurre_post_thumbnail(){
 		$excerpt = substr($excerpt, 0, $limit);
 		$excerpt = substr($excerpt, 0, strripos($excerpt, " "));
 		$excerpt = trim(preg_replace( '/\s+/', ' ', $excerpt));
-		$excerpt = $excerpt;
-		// .'... <a href="'.get_permalink($post->ID).'">more</a>';
+		$excerpt = $excerpt.'...';
 		return $excerpt;
 	}
 
@@ -206,53 +210,101 @@ function shurre_post_thumbnail(){
 			$background_color = 'blue lighten-2';
 		}elseif ($cat_name === 'Ocasiones') {
 			$background_color = 'yellow darken-2';
-		}elseif ($cat_name === 'Paises') {
+		}elseif ($cat_name === 'Regiones') {
 			$background_color = 'teal darken-2';
 		}
+		$args = array(
+			'category_name' => $cat_name,
+			'posts_per_page' => 3,
+			'order' => 'DESC',
+			'orderby' => 'date'
+		);
 
-		echo '<div class="row">';
-				echo '<h5 class="card-panel '. $background_color .' white-text text-darken-0"> <i class="material-icons">local_dining</i> Nuevo Post de '. $cat_name. ' </h5>';
-				/* Start the Loop */
-				echo '<div class="col m12">';
-				query_posts('category_name='.$cat_name);			
-				$i = 0; while (have_posts() && $i < 3) :
-						the_post();
-						get_template_part( 'template-parts/content-index', get_post_type() );
-						$i++;
-					endwhile;
-				echo '</div>';
-			echo '</div>';
+		$query = new WP_Query( $args );
+
+		if ( $query->have_posts() ) : ?>
+		<div class="row">
+			<h5 class="card-panel <?php echo $background_color ?> white-text text-darken-0"> <i class="material-icons">local_dining</i> Nuevo Post de <?php echo $cat_name?> </h5>
+			<!-- the loop -->
+			<?php while ( $query->have_posts() ) : $query->the_post(); ?>
+					<?php get_template_part( 'template-parts/content-index', get_post_type() );?>
+			<?php endwhile; ?>
+			<!-- end of the loop -->
+		</div>
+		<?php else : ?>
+			<p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
+		<?php endif;
+
+
+		// echo '<div class="row">';
+		// 		echo '<h5 class="card-panel '. $background_color .' white-text text-darken-0"> <i class="material-icons">local_dining</i> Nuevo Post de '. $cat_name. ' </h5>';
+		// 		/* Start the Loop */
+		// 		echo '<div class="col m12">';
+		// 		//Limitar post a 3 entradas por página, Limitar a la categoría en orden ascendente
+		// 		query_posts( 'order=DESC', 'orderby=date','category_name='.$cat_name);			
+		// 		$i = 0; 
+		// 		while (have_posts() && $i < 3) :
+		// 				the_post();
+		// 				get_template_part( 'template-parts/content-index', get_post_type() );
+		// 				$i++;
+		// 		endwhile;
+		// 		echo '</div>';
+		// 	echo '</div>';
 	}
 
-
-	add_filter( 'wp_nav_menu_items', 'items_menu', 10, 2);
-
-	function items_menu( $items, $args ) {
-	
-		if ($args->theme_location == 'primary') {
-			if (is_user_logged_in())
-			{
-
-
-                  } else {
-                   
-                    echo '<a href="'.wp_login_url().'" rel="home"><i class="material-icons">assignment_turned_in</i>Iniciar Sesión</a>'; 
-				  }
-
-				$items .= '<li">
-							<a href="'. wp_logout_url(get_permalink()) .'"> <i class="material-icons">arrow_back</i>Cerrar Sesión. </a>
-							</li>';
-			}
-			else
-			{
+	/*************************************************
+	 Mostrar / Ocultar iniciar sesión - Registrarse
+	**************************************************/
+	add_filter( 'wp_nav_menu_items', 'register_link', 10, 2);
+	function register_link( $items, $args ) {
+		if($args->theme_location === 'menu-1'){
+			$items .= '<li>
+						<a href="https://behance.net/ljmarquezg"><i class="material-icons">contacts</i>Acerca de mi</a>
+					  </li>';
+			if (is_user_logged_in()){
 				$items .= '<li>
-							<a href="'. wp_login_url(get_permalink()) .'"> <i class="material-icons">description</i>Registrarse</a> 
-							</li>';
-				$items .= '<li>
-							<a href="'. wp_login_url(get_permalink()) .'"><i class="material-icons">contacts</i>'. __("Log In") .'</a>
-							</li>';
-
+					<a href="'. wp_logout_url(get_home_url()) .'"> <i class="material-icons">arrow_back</i>Cerrar Sesión</a> 
+				</li>';
 			}
-	
+			if (!is_user_logged_in()){
+			$items .= 
+				'<li>
+					<a href="'. wp_login_url() .'"> <i class="material-icons">arrow_forward</i>Iniciar Sesión</a> 
+				</li>';
+			$items .=
+				'<li>
+					<a href="'. wp_registration_url() .'"> <i class="material-icons">description</i>Registrarse</a> 
+				</li>';
+			}
+		};			
 		return $items;
 	}
+
+	/*********************************************
+	 	Permitir al usuario agregar recetas nuevas
+	*********************************************/
+	function agregar_receta() {
+			if (is_user_logged_in()){
+			echo '<li>
+				<a href="'.get_site_url().'/wp-admin/post-new.php" class="waves-effect waves-light btn orange darken-1"><i class="material-icons left  white-text">edit</i>Agregar Receta</a>
+			</li>';
+		};			
+		return $items;
+	}
+
+	/*********************************************
+	 Widgets en footer
+	*********************************************/
+	add_action( 'widgets_init', 'register_new_sidebars' );
+	function register_new_sidebars() {
+		register_sidebar(array(
+		'name' => __('Pie de página'),
+		'id' => 'sidebar-footer',
+		'before_widget' => '<div class="widget-footer">',
+		'after_widget' => '</div>',
+		'before_title' => '<h4>',
+		'after_title' => '</h4>'
+		));
+	}
+	
+?>

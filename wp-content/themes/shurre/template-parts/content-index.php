@@ -34,7 +34,7 @@
 							<?php 
 							}
 
-							if (get_cat_name($categoria->category_parent) === 'Paises' ){
+							if (get_cat_name($categoria->category_parent) === 'Regiones' ){
 							?>
 							<div class="row">
 								<div class="chip">

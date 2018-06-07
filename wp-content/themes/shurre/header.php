@@ -38,17 +38,6 @@
       <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'recipes' ); ?></a>
       <header id="masthead" class="site-header">
         <div class="site-branding">
-          <?php
-          if ( is_front_page() && is_home() ) :
-          ?>
-          <!-- <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1> -->
-          <?php
-          else :
-          ?>
-          <!-- <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p> -->
-          <?php
-          endif;
-          ?>
         </div><!-- .site-branding -->
         <div class="navbar-fixed">
           <nav class="main-menu">
@@ -65,48 +54,6 @@
 
           </nav><!-- #site-navigation -->
         </div>
-
-    <ul id="slide-out" class="sidenav">
-    <div class="card">
-      <div class="card-image">
-        <!-- <img src="<?php echo get_stylesheet_directory_uri()?>/img/sidebar_bk.jpeg)"> -->
-        <?php 
-          if (the_custom_logo()):
-            echo the_custom_logo(); 
-          else:
-          ?>
-          <!--a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a-->
-          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-            <img src="<?php echo get_stylesheet_directory_uri()?>/img/logo.png" class="logo">
-          </a>
-          <!-- <?php bloginfo( 'name' ); ?></a> -->
-          <?php
-          endif;
-          ?>
-          
-        <span class="card-title">
-        <?php 
-          $recipes_description = get_bloginfo( 'description', 'display' );
-          if ( $recipes_description || is_customize_preview() ) :
-            echo $recipes_description;
-          ?>
-          <?php endif;?>
-        </span>
-      </div>
-      <div class="card-content">
-        <?php get_search_form(); ?>
-      </div>
-	  
-	 
-      <!-- <ul class="collection with-header">
-        <li class="collection-header"><h4>First Names</h4></li>
-        <li class="collection-item">Alvin</li>
-        <li class="collection-item">Alvin</li>
-        <li class="collection-item">Alvin</li>
-        <li class="collection-item">Alvin</li>
-      </ul> -->
-</ul>
-
 </header><!-- #masthead -->
 
 <div id="content" class="site-content">

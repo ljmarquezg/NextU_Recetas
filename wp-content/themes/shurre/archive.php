@@ -19,11 +19,11 @@ get_header();
 				<?php
 				$categoria = get_query_var('category_name', 0);
 				if ( $categoria === 'platos') :
-					the_archive_title( '<div class="card-panel blue lighten-2 white-text text-darken-0"> <i class="material-icons">local_dining</i>', '</div>' );
+					the_archive_title( '<div class="card-panel blue lighten-2 white-text text-darken-0"> <i class="material-icons">local_dining</i><h2 style="display: inline;margin-left: 10px; font-size:2.28rem;">', '</h2></div>' );
 				elseif ( $categoria === 'ocasiones') :
-					the_archive_title( '<div class="card-panel yellow darken-2 white-text text-darken-0"> <i class="material-icons">label</i>', '</div>' );
+					the_archive_title( '<div class="card-panel yellow darken-2 white-text text-darken-0"> <i class="material-icons">label</i><h2 style="display: inline;margin-left: 10px; font-size:2.28rem;">', '</h2></div>' );
 				elseif ( $categoria === 'paises') :
-					the_archive_title( '<div class="card-panel teal darken-2 white-text text-darken-0"> <i class="material-icons">language</i>', '</div>' );
+					the_archive_title( '<div class="card-panel teal darken-2 white-text text-darken-0"> <i class="material-icons">language</i><h2 style="display: inline;margin-left: 10px; font-size:2.28rem;">', '</h2></div>' );
 				endif;			
 				the_archive_description( '<div class="archive-description">', '</div>' );
 				?>
