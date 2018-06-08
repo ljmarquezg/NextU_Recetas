@@ -15,7 +15,7 @@
         ?>
       <p>
 			<?php 
-				echo get_excerpt(200, 'content');
+				echo get_excerpt();
 			?>
 			</p>
         <footer class="entry-footer">

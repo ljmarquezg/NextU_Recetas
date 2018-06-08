@@ -7,8 +7,8 @@
  * @package ShUrRe
  */
 ?>
-<aside id="secondary" class="widget-area">
-<ul id="slide-out" class="sidenav cyan darken-3">
+<aside id="secondary" class="widget-area cyan darken-3">
+<ul id="slide-out" class="sidenav">
 <div class="card" style="margin:0;">
   <div class="card-image">
 	<!-- <img src="<?php echo get_stylesheet_directory_uri()?>/img/sidebar_bk.jpeg)"> -->
@@ -37,7 +37,7 @@
   </div>
   <div class="card-content">
 	<?php 
-			get_search_form(); 
+			get_search_form();
 			agregar_receta();
 	?>
 	
@@ -58,14 +58,15 @@
 		<ul class="collection with-header">
         <li class="collection-header"><h6><b>Categorías</b></h6></li>
 				<?php
-				
 							wp_nav_menu( array(
 							'theme_location' => 'sidebar',
 							'menu_id' => 'sidebar-menu',
+							'menu' => 'sidebar',
 						) );
 					}
 				?>	
-      </ul>
+			</ul>
+			<p>Puede agergar mas información agregando widgets en el panel de Apariencias > Widgets > Sidebar</p>
 	<?php		
 	}
 		

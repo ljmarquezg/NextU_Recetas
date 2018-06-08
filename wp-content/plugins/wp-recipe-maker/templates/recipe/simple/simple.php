@@ -12,14 +12,6 @@
 // @codingStandardsIgnoreStart
 ?>
 <div class="wprm-recipe wprm-recipe-simple row">
-	<!-- <div class="wprm-recipe-image-container">
-		<div class="wprm-recipe-image"><?php echo WPRM_Template_Helper::recipe_image( $recipe, 'thumbnail' ); ?></div>
-		<div class="wprm-recipe-buttons">
-			<?php echo $recipe->rating_stars( true ); ?>
-			<a href="<?php echo $recipe->print_url(); ?>" class="wprm-recipe-print" target="_blank" rel="nofollow"><span class="wprm-recipe-details-icon"><?php include( WPRM_DIR . 'assets/icons/printer.svg' ); ?></span> <?php echo WPRM_Template_Helper::label( 'print_button' ); ?></a>
-		</div>
-	</div> -->
-	
 	<div class="wprm-recipe-details-container wprm-recipe-tags-container">
 	<div class="row">
 		<?php
@@ -56,31 +48,6 @@
 
 		}?>
 		</div>
-		<?php 
-		// $taxonomies = WPRM_Taxonomies::get_taxonomies();
-
-		// foreach ( $taxonomies as $taxonomy => $options ) :
-		// 	$key = substr( $taxonomy, 5 );
-		// 	$terms = $recipe->tags( $key );
-
-			// Hide keywords from template.
-			// if ( 'keyword' === $key && ! WPRM_Settings::get( 'metadata_keywords_in_template' ) ) {
-			// 	$terms = array();
-			// }
-			// if ( count( $terms ) > 0 ) : ?>
-			<!-- <div class="wprm-recipe-<?php echo $key; ?>-container">
-				<span class="wprm-recipe-details-icon"><?php include( WPRM_DIR . 'assets/icons/tag.svg' ); ?></span> <span class="wprm-recipe-details-name wprm-recipe-<?php echo $key; ?>-name"><?php echo WPRM_Template_Helper::label( $key . '_tags', $options['singular_name'] ); ?></span>
-				<span class="wprm-recipe-<?php echo $key; ?>">
-					<?php foreach ( $terms as $index => $term ) {
-						if ( 0 !== $index ) {
-							echo ', ';
-						}
-						echo $term->name;
-					} ?>
-				</span>
-			</div> -->
-		<?php //endif; // Count.
-		//endforeach; // Taxonomies. ?>
 	</div>
 
 	
@@ -93,12 +60,7 @@
 					<div class="collapsible-body">
 						<span>
 							<?php 
-							if ($recipe->summary()){
-								echo $recipe->summary(); 
-							}else{
-								echo 'Si la descripción es nula el plugin mostrará un error';
-							}
-								
+								echo $recipe->summary(); 							
 							?>
 						</span>
 

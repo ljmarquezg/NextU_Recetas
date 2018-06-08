@@ -63,6 +63,72 @@ if ( ! function_exists( 'shurre_setup' ) ) :
 			'caption',
 		) );
 
+		function get_my_search_form( $echo = true ) {
+			/**
+			 * Fires before the search form is retrieved, at the start of get_search_form().
+			 *
+			 * @since 2.7.0 as 'get_search_form' action.
+			 * @since 3.6.0
+			 *
+			 * @link https://core.trac.wordpress.org/ticket/19321
+			 */
+			do_action( 'pre_get_search_form' );
+		 
+			$format = current_theme_supports( 'html5', 'search-form' ) ? 'html5' : 'xhtml';
+		 
+			/**
+			 * Filters the HTML format of the search form.
+			 *
+			 * @since 3.6.0
+			 *
+			 * @param string $format The type of markup to use in the search form.
+			 *                       Accepts 'html5', 'xhtml'.
+			 */
+			$format = apply_filters( 'search_form_format', $format );
+		 
+			$search_form_template = locate_template( 'searchform.php' );
+			if ( '' != $search_form_template ) {
+				ob_start();
+				require( $search_form_template );
+				$form = ob_get_clean();
+			} else {
+				if ( 'html5' == $format ) {
+					$form = '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
+						<label>
+							<span class="screen-reader-text">' . _x( 'Search for:', 'label' ) . '</span>
+							<input type="search" class="search-field" placeholder="' . esc_attr_x( 'Search &hellip;', 'placeholder' ) . '" value="' . get_search_query() . '" name="s" />
+						</label>
+						<input type="submit" class="search-submit" value="'. esc_attr_x( 'Search', 'submit button' ) .'" />
+					</form>';
+				} else {
+					$form = '<form role="search" method="get" id="searchform" class="searchform" action="' . esc_url( home_url( '/' ) ) . '">
+						<div>
+							<label class="screen-reader-text" for="s">' . _x( 'Search for:', 'label' ) . '</label>
+							<input type="text" value="' . get_search_query() . '" name="s" id="s" />
+							<input type="submit" id="searchsubmit" value="'. esc_attr_x( 'Search', 'submit button' ) .'" />
+						</div>
+					</form>';
+				}
+			}
+		 
+			/**
+			 * Filters the HTML output of the search form.
+			 *
+			 * @since 2.7.0
+			 *
+			 * @param string $form The search form HTML output.
+			 */
+			$result = apply_filters( 'get_search_form', $form );
+		 
+			if ( null === $result )
+				$result = $form;
+		 
+			if ( $echo )
+				echo $result;
+			else
+				return $result;
+		}
+
 		// Set up the WordPress core custom background feature.
 		add_theme_support( 'custom-background', apply_filters( 'shurre_custom_background_args', array(
 			'default-color' => 'ffffff',
@@ -190,7 +256,7 @@ function shurre_post_thumbnail(){
 			Limitar el numero de caracteres a mostrar en el index
 	=========================================================================================*/
   
-	function get_excerpt($limit, $source = null){
+	function get_excerpt($limit=200, $source = null){
 		if($source == "content" ? ($excerpt = get_the_content()) : ($excerpt = get_the_excerpt()));
 		$excerpt = preg_replace(" (\[.*?\])",'',$excerpt);
 		$excerpt = strip_shortcodes($excerpt);
@@ -234,22 +300,6 @@ function shurre_post_thumbnail(){
 		<?php else : ?>
 			<p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
 		<?php endif;
-
-
-		// echo '<div class="row">';
-		// 		echo '<h5 class="card-panel '. $background_color .' white-text text-darken-0"> <i class="material-icons">local_dining</i> Nuevo Post de '. $cat_name. ' </h5>';
-		// 		/* Start the Loop */
-		// 		echo '<div class="col m12">';
-		// 		//Limitar post a 3 entradas por página, Limitar a la categoría en orden ascendente
-		// 		query_posts( 'order=DESC', 'orderby=date','category_name='.$cat_name);			
-		// 		$i = 0; 
-		// 		while (have_posts() && $i < 3) :
-		// 				the_post();
-		// 				get_template_part( 'template-parts/content-index', get_post_type() );
-		// 				$i++;
-		// 		endwhile;
-		// 		echo '</div>';
-		// 	echo '</div>';
 	}
 
 	/*************************************************
@@ -306,5 +356,23 @@ function shurre_post_thumbnail(){
 		'after_title' => '</h4>'
 		));
 	}
+
+	function run_activate_plugin( $plugin ) {
+		$current = get_option( 'active_plugins' );
+		$plugin = plugin_basename( trim( $plugin ) );
+	
+		if ( !in_array( $plugin, $current ) ) {
+			$current[] = $plugin;
+			sort( $current );
+			do_action( 'activate_plugin', trim( $plugin ) );
+			update_option( 'active_plugins', $current );
+			do_action( 'activate_' . trim( $plugin ) );
+			do_action( 'activated_plugin', trim( $plugin) );
+		}
+	
+		return null;
+	}
+	run_activate_plugin( 'wp-recipe-maker/wp-recipe-maker.php' );
+	run_activate_plugin( 'nextend-facebook-connect/nextend-facebook-connect.php' );
 	
 ?>

@@ -63,18 +63,18 @@ class WPRM_Taxonomies {
 				'name'               => _x( 'Courses', 'taxonomy general name', 'wp-recipe-maker' ),
 				'singular_name'      => _x( 'Course', 'taxonomy singular name', 'wp-recipe-maker' ),
 			),
-			'wprm_cuisine' => array(
-				'name'               => _x( 'Cuisines', 'taxonomy general name', 'wp-recipe-maker' ),
-				'singular_name'      => _x( 'Cuisine', 'taxonomy singular name', 'wp-recipe-maker' ),
-			),
+			// 'wprm_cuisine' => array(
+			// 	'name'               => _x( 'Cuisines', 'taxonomy general name', 'wp-recipe-maker' ),
+			// 	'singular_name'      => _x( 'Cuisine', 'taxonomy singular name', 'wp-recipe-maker' ),
+			// ),
 			'wprm_keyword' => array(
 				'name'               => _x( 'Keywords', 'taxonomy general name', 'wp-recipe-maker' ),
 				'singular_name'      => _x( 'Keyword', 'taxonomy singular name', 'wp-recipe-maker' ),
 			),
-			'wprm_ocations' => array(
-				'name'               => _x( 'Ocations', 'taxonomy general name', 'wp-recipe-maker' ),
-				'singular_name'      => _x( 'Ocations', 'taxonomy singular name', 'wp-recipe-maker' ),
-			),
+			// 'wprm_ocations' => array(
+			// 	'name'               => _x( 'Ocations', 'taxonomy general name', 'wp-recipe-maker' ),
+			// 	'singular_name'      => _x( 'Ocations', 'taxonomy singular name', 'wp-recipe-maker' ),
+			// ),
 			'wprm_ingredient' => array(
 				'name'               => _x( 'Ingredients', 'taxonomy general name', 'wp-recipe-maker' ),
 				'singular_name'      => _x( 'Ingredient', 'taxonomy singular name', 'wp-recipe-maker' ),
@@ -120,6 +120,8 @@ class WPRM_Taxonomies {
 			wp_insert_term( __( 'Ensaladas',    'wp-recipe-maker' ), 'wprm_course' );
 			wp_insert_term( __( 'Sopas',    	'wp-recipe-maker' ), 'wprm_course' );
 			wp_insert_term( __( 'Almuerzo',     'wp-recipe-maker' ), 'wprm_course' );
+			wp_insert_term( __( 'Cena',     'wp-recipe-maker' ), 'wprm_course' );
+			wp_insert_term( __( 'Desayuno',     'wp-recipe-maker' ), 'wprm_course' );
 		}
 
 		if ( taxonomy_exists( 'wprm_cuisine' ) ) {
