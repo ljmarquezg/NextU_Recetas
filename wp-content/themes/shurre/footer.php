@@ -22,12 +22,14 @@
                 <h5 class="white-text">Shurre</h5>
                 <p class="grey-text text-lighten-4">Blog diseñado para mostrar listado de recetas para NextU</p>
               </div>
-              <div class="col l4 offset-l2 s12">
-              <?php if ( is_active_sidebar( 'sidebar-footer' ) ) : ?>
-                <div id="sidebar-footer">
-                <?php dynamic_sidebar( 'sidebar-footer' ); ?>
-                </div>
-              <?php endif; ?>
+              <div class="col l4 s12">
+              <div id="sidebar-footer">
+              <?php if ( is_active_sidebar( 'sidebar-footer' ) ) :
+                    dynamic_sidebar( 'sidebar-footer' );
+                    else:
+                      echo '<p>Puede agregar mas información agregando items al widget > Footer</p>';
+                    endif; ?>
+              </div>
               </div>
             </div>
           </div>

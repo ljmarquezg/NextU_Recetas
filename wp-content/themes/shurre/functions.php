@@ -302,12 +302,20 @@ function shurre_post_thumbnail(){
 		<?php endif;
 	}
 
-	/*************************************************
-	 Mostrar / Ocultar iniciar sesión - Registrarse
-	**************************************************/
-	add_filter( 'wp_nav_menu_items', 'register_link', 10, 2);
-	function register_link( $items, $args ) {
-		if($args->theme_location === 'menu-1'){
+	/*=============================================================
+		Generar menú superior de manera automática
+	==============================================================*/
+	function mostrar_menu() {
+		  $items ='<li>
+			<a href="'.get_category_link(get_cat_ID('Platos')).'"><i class="material-icons">local_dining</i>Platos</a>
+		  </li>';
+		  $items .='<li>
+			<a href="'.get_category_link(get_cat_ID('Ocasiones')).'"><i class="material-icons">label</i>Ocasiones</a>
+		  </li>';
+		  $items .='<li>
+			<a href="'.get_category_link(get_cat_ID('Regiones')).'"><i class="material-icons">language</i>Regiones</a>
+		  </li>';
+		  
 			$items .= '<li>
 						<a href="https://behance.net/ljmarquezg"><i class="material-icons">contacts</i>Acerca de mi</a>
 					  </li>';
@@ -325,38 +333,13 @@ function shurre_post_thumbnail(){
 				'<li>
 					<a href="'. wp_registration_url() .'"> <i class="material-icons">description</i>Registrarse</a> 
 				</li>';
-			}
-		};			
+			}		
 		return $items;
 	}
 
-	/*********************************************
-	 	Permitir al usuario agregar recetas nuevas
-	*********************************************/
-	function agregar_receta() {
-			if (is_user_logged_in()){
-			echo '<li>
-				<a href="'.get_site_url().'/wp-admin/post-new.php" class="waves-effect waves-light btn orange darken-1"><i class="material-icons left  white-text">edit</i>Agregar Receta</a>
-			</li>';
-		};			
-		return $items;
-	}
-
-	/*********************************************
-	 Widgets en footer
-	*********************************************/
-	add_action( 'widgets_init', 'register_new_sidebars' );
-	function register_new_sidebars() {
-		register_sidebar(array(
-		'name' => __('Pie de página'),
-		'id' => 'sidebar-footer',
-		'before_widget' => '<div class="widget-footer">',
-		'after_widget' => '</div>',
-		'before_title' => '<h4>',
-		'after_title' => '</h4>'
-		));
-	}
-
+	/*=============================================================
+		Activar plugin para iniciar sesion con redes sociales
+	==============================================================*/
 	function run_activate_plugin( $plugin ) {
 		$current = get_option( 'active_plugins' );
 		$plugin = plugin_basename( trim( $plugin ) );
@@ -372,7 +355,40 @@ function shurre_post_thumbnail(){
 	
 		return null;
 	}
-	run_activate_plugin( 'wp-recipe-maker/wp-recipe-maker.php' );
 	run_activate_plugin( 'nextend-facebook-connect/nextend-facebook-connect.php' );
+	/*=============================================================
+		Incluir plugin para activación de recetas directamente en el tema
+	==============================================================*/
+	require dirname( __FILE__ ).'/wp-recipe-maker/wp-recipe-maker.php' ;
+
+
+	/*********************************************
+	 	Permitir al usuario agregar recetas nuevas
+	*********************************************/
+	function agregar_receta() {
+			if (is_user_logged_in()){
+			echo '<li>
+				<a href="'.get_site_url().'/wp-admin/post-new.php" class="waves-effect waves-light btn orange darken-1"><i class="material-icons left  white-text">edit</i>Agregar Receta</a>
+			</li>';
+		};			
+		return $items;
+	}
+
+	/*********************************************
+	 	Widgets en footer
+	*********************************************/
+	add_action( 'widgets_init', 'register_widget_footer' );
+	function register_widget_footer() {
+		register_sidebar(array(
+		'name' => __('Pie de página'),
+		'id' => 'sidebar-footer',
+		'before_widget' => '<div class="widget-footer">',
+		'after_widget' => '</div>',
+		'before_title' => '<h4>',
+		'after_title' => '</h4>'
+		));
+	}
+
+
 	
 ?>

@@ -48,7 +48,6 @@
 	$menu_id = $locations[ $menu_name ] ;
 	$items_menu = wp_get_nav_menu_object($menu_id);
 	// Echo count of items in menu
-
 	if ( is_active_sidebar( 'sidebar-1' ) ) {
 		dynamic_sidebar( 'sidebar-1' );
 	}else{
@@ -64,12 +63,11 @@
 							'menu' => 'sidebar',
 						) );
 					}
-				?>	
-			</ul>
+				?>
 			<p>Puede agergar mas información agregando widgets en el panel de Apariencias > Widgets > Sidebar</p>
+			</ul>
 	<?php		
-	}
-		
+	}		
 	?>
 	
   </div>

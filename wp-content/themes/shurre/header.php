@@ -36,6 +36,9 @@
   <body <?php body_class(); ?>>
     <div id="page" class="site">
       <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'recipes' ); ?></a>
+      <div class="loader-container" id="loader">
+        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      </div>
       <header id="masthead" class="site-header">
         <div class="site-branding">
         </div><!-- .site-branding -->
@@ -44,10 +47,7 @@
             <div class="nav-wrapper">
               <ul id="nav-mobile" class="hide-on-med-and-down">
                 <?php
-                wp_nav_menu( array(
-                'theme_location'  => 'menu-1',
-                'menu_id'         => 'primary-menu',
-                ) );
+                echo mostrar_menu();
                 ?>
                 </ul>
             </div>
