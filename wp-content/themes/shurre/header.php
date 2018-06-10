@@ -25,9 +25,8 @@
     <!--Importar Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Definir el favicon del sitio-->
-    <link rel="shorcut icon" href="<?php echo  get_stylesheet_directory_uri()?>/favicon.ico">
-    <!--<script src="main.js"></script> -->
-    <link rel="pingback" href="<?php bloginfo('pingback_url');?>">            
+    <link rel="shorcut icon" href="<?php echo  get_stylesheet_directory_uri()?>/img/logo.png">
+    <link rel="pingback" href="<?php bloginfo('pingback_url');?>">    
 
 	<?php wp_head(); ?>
 	
