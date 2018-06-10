@@ -3,6 +3,7 @@ $(document).ready(function(){
     $('.collapsible').collapsible();
     $('#loader').addClass('hide-loader');
     retraso();
+    $('form ~ section > form').detach()
 });
 
 function retraso() {
